@@ -150,13 +150,27 @@ class Solution {
         }
 
 
+        //14. Longest Common Prefix
+        fun longestCommonPrefix(strs: Array<String>): String {
+            var result = ""
+            strs.sort()
+            val first = strs[0]
+            val last = strs[strs.size-1]
+            for (i in first.indices){
+                result = if (first[i] == last[i]) result + first[i] else break
+            }
+            return result
+        }
+
+
     }
 
 }
 
 fun main() {
-    var chars = charArrayOf('a', 'a', 'b', 'b', 'c', 'c', 'c')
-    println(Solution.compress(chars))
-    println(chars.joinToString())
+    var strs = arrayOf("flower","flow","flight")
+    println(Solution.longestCommonPrefix(strs))
+    strs = arrayOf("dog","racecar","car")
+    println(Solution.longestCommonPrefix(strs))
 
 }
