@@ -1,3 +1,5 @@
+import kotlin.math.max
+
 class Solution {
     companion object {
         //88. Merge Sorted Array----------------------------------------------------------------------------------------
@@ -155,10 +157,30 @@ class Solution {
             var result = ""
             strs.sort()
             val first = strs[0]
-            val last = strs[strs.size-1]
-            for (i in first.indices){
+            val last = strs[strs.size - 1]
+            for (i in first.indices) {
                 result = if (first[i] == last[i]) result + first[i] else break
             }
+            return result
+        }
+
+
+        //1493. Longest Subarray of 1's After Deleting One Element
+        fun longestSubarray(nums: IntArray): Int {
+            var result = 0
+            var left = 0
+            var right = 0
+            var zero = -1
+
+            while (right < nums.size) {
+                if (nums[right] != 1) {
+                    left = zero + 1
+                    zero = right
+                }
+                result = max(result, right - left)
+                right++
+            }
+
             return result
         }
 
@@ -168,9 +190,52 @@ class Solution {
 }
 
 fun main() {
-    var strs = arrayOf("flower","flow","flight")
-    println(Solution.longestCommonPrefix(strs))
-    strs = arrayOf("dog","racecar","car")
-    println(Solution.longestCommonPrefix(strs))
-
+    var nums = intArrayOf(1, 1, 0, 1)
+    println(Solution.longestSubarray(nums))
+    nums = intArrayOf(0, 1, 1, 1, 0, 1, 1, 0, 1)
+    println(Solution.longestSubarray(nums))
+    nums = intArrayOf(1, 1, 1)
+    println(Solution.longestSubarray(nums))
+    nums = intArrayOf(
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1
+    )
+    println(Solution.longestSubarray(nums))
 }
