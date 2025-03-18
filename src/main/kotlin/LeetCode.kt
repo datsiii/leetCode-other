@@ -185,57 +185,36 @@ class Solution {
         }
 
 
+        //2996. Smallest Missing Integer Greater Than Sequential Prefix Sum
+        fun missingInteger(nums: IntArray): Int {
+            var sum = 0
+            var last = 0
+            for (i in 1..<nums.size) {
+                if (nums[i] != nums[i - 1] + 1) break
+                last = i
+            }
+            sum = nums.slice(0..last).sum()
+            while (sum in nums.toSet()) {
+                sum++
+            }
+            return sum
+        }
+
+
     }
 
 }
 
 fun main() {
-    var nums = intArrayOf(1, 1, 0, 1)
-    println(Solution.longestSubarray(nums))
-    nums = intArrayOf(0, 1, 1, 1, 0, 1, 1, 0, 1)
-    println(Solution.longestSubarray(nums))
-    nums = intArrayOf(1, 1, 1)
-    println(Solution.longestSubarray(nums))
-    nums = intArrayOf(
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        0,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        0,
-        1,
-        0,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        0,
-        1,
-        1,
-        1,
-        1,
-        0,
-        1,
-        1,
-        1,
-        1,
-        1
-    )
-    println(Solution.longestSubarray(nums))
+    var nums = intArrayOf(1, 2, 3, 2, 5)
+    println(Solution.missingInteger(nums))
+    nums = intArrayOf(3, 4, 5, 1, 12, 14, 13)
+    println(Solution.missingInteger(nums))
+    nums = intArrayOf(29, 30, 31, 32, 33, 34, 35, 36, 37)
+    println(Solution.missingInteger(nums))
+    nums = intArrayOf(14, 9, 6, 9, 7, 9, 10, 4, 9, 9, 4, 4)
+    println(Solution.missingInteger(nums))
+    nums = intArrayOf(1, 4, 3)
+    println(Solution.missingInteger(nums))
+
 }
