@@ -223,20 +223,6 @@ class Solution {
             return heap.joinToString()
         }
 
-        fun isPalindrome(s: String): Boolean {
-            var left = 0
-            var right = s.length - 1
-            while(true){
-                while(!s[left].isLetterOrDigit() and (left < right)){left++}
-                while(!s[right].isLetterOrDigit() and (left < right)){right--}
-                if(left >= right) break
-                if((s[left].lowercase() != s[right].lowercase())) return false
-                left++
-                right--
-            }
-            return true
-        }
-
 
         //206. Reverse Linked List-------------------------------------------------------------------------------------
         /**
@@ -306,6 +292,23 @@ class Solution {
                 hmap.put(nums[i], i)
             }
             return res
+        }
+
+
+
+        //125. Valid Palindrome-----------------------------------------------------------------------------------------
+        fun isPalindrome(s: String): Boolean {
+            var left = 0
+            var right = s.length - 1
+            while(true){
+                while(!s[left].isLetterOrDigit() and (left < right)){left++}
+                while(!s[right].isLetterOrDigit() and (left < right)){right--}
+                if(left >= right) break
+                if((s[left].lowercase() != s[right].lowercase())) return false
+                left++
+                right--
+            }
+            return true
         }
 
 
