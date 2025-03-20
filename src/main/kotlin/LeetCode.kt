@@ -264,7 +264,32 @@ class Solution {
         }
 
 
-
+        //94. Binary Tree Inorder Traversal----------------------------------------------------------------------------
+        /**
+         * Example:
+         * var ti = TreeNode(5)
+         * var v = ti.`val`
+         * Definition for a binary tree node.
+         * class TreeNode(var `val`: Int) {
+         *     var left: TreeNode? = null
+         *     var right: TreeNode? = null
+         * }
+         */
+        class TreeNode(var `val`: Int) {
+            var left: TreeNode? = null
+            var right: TreeNode? = null
+        }
+        fun inorderTraversal(root: TreeNode?): List<Int> {
+            val result = mutableListOf<Int>()
+            fun rec(root: TreeNode?){
+                if(root == null) return
+                rec(root.left)
+                result.add(root.`val`)
+                rec(root.right)
+            }
+            rec(root)
+            return result
+        }
 
 
     }
