@@ -329,6 +329,37 @@ class Solution {
         }
 
 
+        //21. Merge Two Sorted Lists------------------------------------------------------------------------------------
+        /**
+         * Example:
+         * var li = ListNode(5)
+         * var v = li.`val`
+         * Definition for singly-linked list.
+         * class ListNode(var `val`: Int) {
+         *     var next: ListNode? = null
+         * }
+         */
+        fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {
+            val head = ListNode(0)
+            var cur = head
+            var cur1 = list1
+            var cur2 = list2
+            while ((cur1 != null) and (cur2 != null)){
+                if (cur1!!.`val` < cur2!!.`val`){
+                    cur.next = cur1
+                    cur1 = cur1.next
+                }
+                else{
+                    cur.next = cur2
+                    cur2 = cur2.next
+                }
+                cur = cur.next!!
+            }
+            cur.next = cur1 ?: cur2
+            return head.next
+        }
+
+
     }
 
 
