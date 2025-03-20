@@ -121,7 +121,7 @@ class Solution {
         }
 
 
-        //122. Best Time to Buy and Sell Stock II
+        //122. Best Time to Buy and Sell Stock II-----------------------------------------------------------------------
         fun maxProfit3(prices: IntArray): Int {
             var sum = 0
             for (i in 0..<prices.size - 1) {
@@ -131,7 +131,7 @@ class Solution {
             return sum
         }
 
-        //443. String Compression
+        //443. String Compression---------------------------------------------------------------------------------------
         fun compress(chars: CharArray): Int {
             var r = 0
             var w = 0
@@ -155,7 +155,7 @@ class Solution {
         }
 
 
-        //14. Longest Common Prefix
+        //14. Longest Common Prefix-------------------------------------------------------------------------------------
         fun longestCommonPrefix(strs: Array<String>): String {
             var result = ""
             strs.sort()
@@ -168,7 +168,7 @@ class Solution {
         }
 
 
-        //1493. Longest Subarray of 1's After Deleting One Element
+        //1493. Longest Subarray of 1's After Deleting One Element-------------------------------------------------------
         fun longestSubarray(nums: IntArray): Int {
             var result = 0
             var left = 0
@@ -188,7 +188,7 @@ class Solution {
         }
 
 
-        //2996. Smallest Missing Integer Greater Than Sequential Prefix Sum
+        //2996. Smallest Missing Integer Greater Than Sequential Prefix Sum---------------------------------------------
         fun missingInteger(nums: IntArray): Int {
             var sum = 0
             var last = 0
@@ -204,7 +204,6 @@ class Solution {
         }
 
 
-
         //[1,3,5,6,2...]-----------------------------------------------------------------------------------------------
         fun findMinimum(nums: IntArray, k: Int): String? {
             val heap = PriorityQueue<Int>(compareByDescending { it })
@@ -212,10 +211,9 @@ class Solution {
                 return null
             }
             nums.forEach { n ->
-                if (heap.size < k){
+                if (heap.size < k) {
                     heap.add(n)
-                }
-                else if (n < heap.peek()){
+                } else if (n < heap.peek()) {
                     heap.poll()
                     heap.add(n)
                 }
@@ -237,10 +235,11 @@ class Solution {
         class ListNode(var `val`: Int) {
             var next: ListNode? = null
         }
+
         fun reverseList(head: ListNode?): ListNode? {
             var prev: ListNode? = null
             var cur = head
-            while(cur != null){
+            while (cur != null) {
                 val temp = cur.next
                 cur.next = prev
                 prev = cur
@@ -265,10 +264,11 @@ class Solution {
             var left: TreeNode? = null
             var right: TreeNode? = null
         }
+
         fun inorderTraversal(root: TreeNode?): List<Int> {
             val result = mutableListOf<Int>()
-            fun rec(root: TreeNode?){
-                if(root == null) return
+            fun rec(root: TreeNode?) {
+                if (root == null) return
                 rec(root.left)
                 result.add(root.`val`)
                 rec(root.right)
@@ -281,10 +281,10 @@ class Solution {
         //1. Two Sum---------------------------------------------------------------------------------------------------
         fun twoSum(nums: IntArray, target: Int): IntArray {
             val hmap = HashMap<Int, Int>()
-            val res = intArrayOf(0,0)
-            for(i in 0..<nums.size){
+            val res = intArrayOf(0, 0)
+            for (i in 0..<nums.size) {
                 val temp = target - nums[i]
-                if(temp in hmap) {
+                if (temp in hmap) {
                     res[0] = hmap[temp]!!
                     res[1] = i
                     break
@@ -295,20 +295,37 @@ class Solution {
         }
 
 
-
         //125. Valid Palindrome-----------------------------------------------------------------------------------------
         fun isPalindrome(s: String): Boolean {
             var left = 0
             var right = s.length - 1
-            while(true){
-                while(!s[left].isLetterOrDigit() and (left < right)){left++}
-                while(!s[right].isLetterOrDigit() and (left < right)){right--}
-                if(left >= right) break
-                if((s[left].lowercase() != s[right].lowercase())) return false
+            while (true) {
+                while (!s[left].isLetterOrDigit() and (left < right)) {
+                    left++
+                }
+                while (!s[right].isLetterOrDigit() and (left < right)) {
+                    right--
+                }
+                if (left >= right) break
+                if ((s[left].lowercase() != s[right].lowercase())) return false
                 left++
                 right--
             }
             return true
+        }
+
+
+        //[1,5,3,5,7,2] => [1,5,3,7,2]----------------------------------------------------------------------------------
+        fun removeDuplicates2(nums: IntArray): IntArray {
+            val hset = HashSet<Int>()
+            val result = mutableListOf<Int>()
+            for (i in 0..<nums.size){
+                if (nums[i] !in hset){
+                    hset.add(nums[i])
+                    result.add(nums[i])
+                }
+            }
+            return result.toIntArray()
         }
 
 
