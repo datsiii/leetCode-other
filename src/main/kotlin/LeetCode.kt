@@ -319,8 +319,8 @@ class Solution {
         fun removeDuplicates2(nums: IntArray): IntArray {
             val hset = HashSet<Int>()
             val result = mutableListOf<Int>()
-            for (i in 0..<nums.size){
-                if (nums[i] !in hset){
+            for (i in 0..<nums.size) {
+                if (nums[i] !in hset) {
                     hset.add(nums[i])
                     result.add(nums[i])
                 }
@@ -344,12 +344,11 @@ class Solution {
             var cur = head
             var cur1 = list1
             var cur2 = list2
-            while ((cur1 != null) and (cur2 != null)){
-                if (cur1!!.`val` < cur2!!.`val`){
+            while ((cur1 != null) and (cur2 != null)) {
+                if (cur1!!.`val` < cur2!!.`val`) {
                     cur.next = cur1
                     cur1 = cur1.next
-                }
-                else{
+                } else {
                     cur.next = cur2
                     cur2 = cur2.next
                 }
@@ -373,14 +372,35 @@ class Solution {
          */
         fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
             var res = true
-            fun dfs(p: TreeNode?, q: TreeNode?){
+            fun dfs(p: TreeNode?, q: TreeNode?) {
                 if ((p == null) and (q == null)) return
                 dfs(p?.left, q?.left)
-                if (p?.`val` != q?.`val`) res =  false
+                if (p?.`val` != q?.`val`) res = false
                 dfs(p?.right, q?.right)
             }
             dfs(p, q)
             return res
+        }
+
+
+        //108. Convert Sorted Array to Binary Search Tree---------------------------------------------------------------
+        /**
+         * Example:
+         * var ti = TreeNode(5)
+         * var v = ti.`val`
+         * Definition for a binary tree node.
+         * class TreeNode(var `val`: Int) {
+         *     var left: TreeNode? = null
+         *     var right: TreeNode? = null
+         * }
+         */
+        fun sortedArrayToBST(nums: IntArray): TreeNode? {
+            if(nums.isEmpty()) return null
+            val n = nums.size/2
+            val head = TreeNode(nums[n])
+            head.left = sortedArrayToBST(nums.sliceArray(0..<n))
+            head.right = sortedArrayToBST(nums.sliceArray(n+1..<nums.size))
+            return head
         }
 
 
@@ -390,7 +410,8 @@ class Solution {
 }
 
 fun main() {
-    var s = " "
-    println(Solution.isPalindrome(s))
+    var nums =
+        intArrayOf(-10,-3,0,5,9)
+    println(Solution.sortedArrayToBST(nums))
 
 }
