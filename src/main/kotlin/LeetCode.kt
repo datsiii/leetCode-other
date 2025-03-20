@@ -404,6 +404,27 @@ class Solution {
         }
 
 
+        //141. Linked List Cycle---------------------------------------------------------------------------------------
+        /**
+         * Example:
+         * var li = ListNode(5)
+         * var v = li.`val`
+         * Definition for singly-linked list.
+         * class ListNode(var `val`: Int) {
+         *     var next: ListNode? = null
+         * }
+         */
+        fun hasCycle(head: ListNode?): Boolean {
+            var tortoise = head
+            var hare = head
+            while ((hare != null) and (hare?.next != null)){
+                tortoise = tortoise?.next
+                hare = hare?.next?.next
+                if (tortoise == hare) return true
+            }
+            return false
+        }
+
     }
 
 
