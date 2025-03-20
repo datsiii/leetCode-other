@@ -360,6 +360,30 @@ class Solution {
         }
 
 
+        //100. Same Tree------------------------------------------------------------------------------------------------
+        /**
+         * Example:
+         * var ti = TreeNode(5)
+         * var v = ti.`val`
+         * Definition for a binary tree node.
+         * class TreeNode(var `val`: Int) {
+         *     var left: TreeNode? = null
+         *     var right: TreeNode? = null
+         * }
+         */
+        fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
+            var res = true
+            fun dfs(p: TreeNode?, q: TreeNode?){
+                if ((p == null) and (q == null)) return
+                dfs(p?.left, q?.left)
+                if (p?.`val` != q?.`val`) res =  false
+                dfs(p?.right, q?.right)
+            }
+            dfs(p, q)
+            return res
+        }
+
+
     }
 
 
