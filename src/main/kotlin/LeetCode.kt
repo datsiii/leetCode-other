@@ -1,3 +1,6 @@
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 import kotlin.math.max
 
 class Solution {
@@ -201,20 +204,76 @@ class Solution {
         }
 
 
+
+        //[1,3,5,6,2...]-----------------------------------------------------------------------------------------------
+        fun findMinimum(nums: IntArray, k: Int): String? {
+            val heap = PriorityQueue<Int>(compareByDescending { it })
+            if (nums.size <= k) {
+                return null
+            }
+            nums.forEach { n ->
+                if (heap.size < k){
+                    heap.add(n)
+                }
+                else if (n < heap.peek()){
+                    heap.poll()
+                    heap.add(n)
+                }
+            }
+            return heap.joinToString()
+        }
+
+        fun isPalindrome(s: String): Boolean {
+            var left = 0
+            var right = s.length - 1
+            while(true){
+                while(!s[left].isLetterOrDigit() and (left < right)){left++}
+                while(!s[right].isLetterOrDigit() and (left < right)){right--}
+                if(left >= right) break
+                if((s[left].lowercase() != s[right].lowercase())) return false
+                left++
+                right--
+            }
+            return true
+        }
+
+
+        //206. Reverse Linked List-------------------------------------------------------------------------------------
+        /**
+         * Example:
+         * var li = ListNode(5)
+         * var v = li.`val`
+         * Definition for singly-linked list.
+         * class ListNode(var `val`: Int) {
+         *     var next: ListNode? = null
+         * }
+         */
+        class ListNode(var `val`: Int) {
+            var next: ListNode? = null
+        }
+        fun reverseList(head: ListNode?): ListNode? {
+            var prev: ListNode? = null
+            var cur = head
+            while(cur != null){
+                val temp = cur.next
+                cur.next = prev
+                prev = cur
+                cur = temp
+            }
+            return prev
+        }
+
+
+
+
+
     }
+
 
 }
 
 fun main() {
-    var nums = intArrayOf(1, 2, 3, 2, 5)
-    println(Solution.missingInteger(nums))
-    nums = intArrayOf(3, 4, 5, 1, 12, 14, 13)
-    println(Solution.missingInteger(nums))
-    nums = intArrayOf(29, 30, 31, 32, 33, 34, 35, 36, 37)
-    println(Solution.missingInteger(nums))
-    nums = intArrayOf(14, 9, 6, 9, 7, 9, 10, 4, 9, 9, 4, 4)
-    println(Solution.missingInteger(nums))
-    nums = intArrayOf(1, 4, 3)
-    println(Solution.missingInteger(nums))
+    var s = " "
+    println(Solution.isPalindrome(s))
 
 }
