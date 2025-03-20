@@ -292,6 +292,23 @@ class Solution {
         }
 
 
+        //1. Two Sum---------------------------------------------------------------------------------------------------
+        fun twoSum(nums: IntArray, target: Int): IntArray {
+            val hmap = HashMap<Int, Int>()
+            val res = intArrayOf(0,0)
+            for(i in 0..<nums.size){
+                val temp = target - nums[i]
+                if(temp in hmap) {
+                    res[0] = hmap[temp]!!
+                    res[1] = i
+                    break
+                }
+                hmap.put(nums[i], i)
+            }
+            return res
+        }
+
+
     }
 
 
