@@ -449,14 +449,42 @@ class Solution {
             return result
         }
 
+        //1971. Find if Path Exists in Graph----------------------------------------------------------------------------
+        fun validPath(n: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean {
+            val graph = mutableMapOf<Int, MutableList<Int>>()
+            for (i in 0 until n) {
+                graph[i] = mutableListOf()
+            }
+            for ((u, v) in edges) {
+                if (u != v) {
+                    graph[u]?.add(v)
+                    graph[v]?.add(u)
+                }
+            }
+            fun dfs(graph: MutableMap<Int, MutableList<Int>>, start: Int, end: Int, visited: MutableSet<Int>): Boolean {
+                if (start == end) {
+                    return true
+                }
+                if (start in visited) return false
+                visited.add(start)
+                for (neighbor in graph[start] ?: emptyList()) {
+                    if (dfs(graph, neighbor, end, visited)) {
+                        return true
+                    }
+
+                }
+                return false
+            }
+            return dfs(graph, source, destination, mutableSetOf())
+        }
+
     }
 
 
 }
 
 fun main() {
-    var nums =
-        intArrayOf(-10, -3, 0, 5, 9)
+    var nums = intArrayOf(-10, -3, 0, 5, 9)
     println(Solution.sortedArrayToBST(nums))
 
 }
