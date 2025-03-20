@@ -395,11 +395,11 @@ class Solution {
          * }
          */
         fun sortedArrayToBST(nums: IntArray): TreeNode? {
-            if(nums.isEmpty()) return null
-            val n = nums.size/2
+            if (nums.isEmpty()) return null
+            val n = nums.size / 2
             val head = TreeNode(nums[n])
             head.left = sortedArrayToBST(nums.sliceArray(0..<n))
-            head.right = sortedArrayToBST(nums.sliceArray(n+1..<nums.size))
+            head.right = sortedArrayToBST(nums.sliceArray(n + 1..<nums.size))
             return head
         }
 
@@ -417,12 +417,36 @@ class Solution {
         fun hasCycle(head: ListNode?): Boolean {
             var tortoise = head
             var hare = head
-            while ((hare != null) and (hare?.next != null)){
+            while ((hare != null) and (hare?.next != null)) {
                 tortoise = tortoise?.next
                 hare = hare?.next?.next
                 if (tortoise == hare) return true
             }
             return false
+        }
+
+
+        //144. Binary Tree Preorder Traversal--------------------------------------------------------------------------
+        /**
+         * Example:
+         * var ti = TreeNode(5)
+         * var v = ti.`val`
+         * Definition for a binary tree node.
+         * class TreeNode(var `val`: Int) {
+         *     var left: TreeNode? = null
+         *     var right: TreeNode? = null
+         * }
+         */
+        fun preorderTraversal(root: TreeNode?): List<Int> {
+            val result = mutableListOf<Int>()
+            fun rec(root: TreeNode?) {
+                if (root == null) return
+                result.add(root.`val`)
+                rec(root.left)
+                rec(root.right)
+            }
+            rec(root)
+            return result
         }
 
     }
@@ -432,7 +456,7 @@ class Solution {
 
 fun main() {
     var nums =
-        intArrayOf(-10,-3,0,5,9)
+        intArrayOf(-10, -3, 0, 5, 9)
     println(Solution.sortedArrayToBST(nums))
 
 }
