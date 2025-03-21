@@ -534,15 +534,34 @@ class Solution {
             return cntUnit
         }
 
+
+        //11. Container With Most Water
+        fun maxArea(height: IntArray): Int {
+            var result = 0
+            var left = 0
+            var right = height.size - 1
+            var n = 0
+            while(left < right){
+                if(height[left] < height[right]){
+                    n = height[left]
+                    result = max(result, n*(right-left))
+                    left++
+                }
+                else{
+                    n = height[right]
+                    result = max(result, n*(right-left))
+                    right--
+                }
+            }
+            return result
+        }
+
     }
 
 
 }
 
 fun main() {
-    var arr1 = intArrayOf(1,10,100)
-    var arr2 = intArrayOf(1000)
-    //println(Solution.longestCommonPrefix(arr1, arr2))
-    var boxTypes = arrayOf(intArrayOf(1, 3),intArrayOf(2,2),intArrayOf(3,1))
-    println(Solution.maximumUnits(boxTypes, 4))
+    var height = intArrayOf(1,8,6,2,5,4,8,3,7)
+    println(Solution.maxArea(height))
 }
