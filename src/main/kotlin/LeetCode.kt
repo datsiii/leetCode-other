@@ -493,14 +493,39 @@ class Solution {
             return right.toInt()
         }
 
+
+        //3043. Find the Length of the Longest Common Prefix------------------------------------------------------------
+        fun longestCommonPrefix(arr1: IntArray, arr2: IntArray): Int {
+            val prefix = HashSet<String>()
+            var res = 0
+            arr1.forEach { int ->
+                var str = ""
+                int.toString().forEach { s ->
+                    str += s
+                    prefix.add(str)
+                }
+            }
+            arr2.forEach { int ->
+                var str = ""
+                int.toString().forEach { s ->
+                    str += s
+                    if (str in prefix){
+                        res = max(str.length, res)
+                    }
+                }
+
+            }
+            return res
+        }
+
     }
 
 
 }
 
 fun main() {
-    var nums = intArrayOf(-10, -3, 0, 5, 9)
-    println(Solution.sortedArrayToBST(nums))
-    println(Solution.mySqrt(6))
+    var arr1 = intArrayOf(1,10,100)
+    var arr2 = intArrayOf(1000)
+    println(Solution.longestCommonPrefix(arr1, arr2))
 
 }
