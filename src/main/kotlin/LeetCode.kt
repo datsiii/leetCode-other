@@ -518,6 +518,22 @@ class Solution {
             return res
         }
 
+
+        //1710. Maximum Units on a Truck--------------------------------------------------------------------------------
+        fun maximumUnits(boxTypes: Array<IntArray>, truckSize: Int): Int {
+            boxTypes.sortByDescending{ it[1] }
+            var cntUnit = 0
+            var cntBox = 0
+            boxTypes.forEach{ box ->
+                for(i in 0..<box[0]){
+                    if(cntBox >= truckSize) return cntUnit
+                    cntUnit += box[1]
+                    cntBox++
+                }
+            }
+            return cntUnit
+        }
+
     }
 
 
@@ -526,6 +542,7 @@ class Solution {
 fun main() {
     var arr1 = intArrayOf(1,10,100)
     var arr2 = intArrayOf(1000)
-    println(Solution.longestCommonPrefix(arr1, arr2))
-
+    //println(Solution.longestCommonPrefix(arr1, arr2))
+    var boxTypes = arrayOf(intArrayOf(1, 3),intArrayOf(2,2),intArrayOf(3,1))
+    println(Solution.maximumUnits(boxTypes, 4))
 }
