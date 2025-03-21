@@ -461,6 +461,7 @@ class Solution {
                     graph[v]?.add(u)
                 }
             }
+
             fun dfs(graph: MutableMap<Int, MutableList<Int>>, start: Int, end: Int, visited: MutableSet<Int>): Boolean {
                 if (start == end) {
                     return true
@@ -478,6 +479,20 @@ class Solution {
             return dfs(graph, source, destination, mutableSetOf())
         }
 
+
+        //69. Sqrt(x)---------------------------------------------------------------------------------------------------
+        fun mySqrt(x: Int): Int {
+            var left: Long = 0
+            var right: Long = x.toLong()
+            while(left <= right){
+                val mid = (left+right)/2
+                if(mid*mid < x) left = mid + 1
+                else if(mid*mid > x) right = mid - 1
+                else return mid.toInt()
+            }
+            return right.toInt()
+        }
+
     }
 
 
@@ -486,5 +501,6 @@ class Solution {
 fun main() {
     var nums = intArrayOf(-10, -3, 0, 5, 9)
     println(Solution.sortedArrayToBST(nums))
+    println(Solution.mySqrt(6))
 
 }
